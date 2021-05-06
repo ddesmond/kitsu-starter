@@ -54,7 +54,7 @@ git config --global --add advice.detachedHead false
 git clone -b 0.12.63-build --single-branch --depth 1 https://github.com/cgwire/kitsu.git /opt/zou/kitsu
 
 # setup.py will read requirements.txt in the current directory
-cd /opt/zou/zou
+cd /opt/zou
 useradd --home /opt/zou zou 
 python3 -m vexport /opt/zou/export && \
     /opt/zou/export/bin/pip install --upgrade pip setuptools wheel && \
@@ -71,6 +71,7 @@ service postgresql start && \
     createdb -T template0 -E UTF8 --owner root zoudb && \
     service postgresql stop
 
+exit
 #sudo -i
 
 # Wait for the startup or shutdown to complete
