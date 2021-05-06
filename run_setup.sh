@@ -30,7 +30,7 @@ apt-get -y install postgresql-12
 apt-get -y install postgresql-client postgresql-server-dev-all
 
 # python3
-add-apt-repository ppa:deadsnakes/ppa
+add-apt-repository ppa:deadsnakes/ppa -y
 apt-get -y install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
 apt-get -y install \
     python3.6 \
@@ -41,7 +41,7 @@ apt-get -y install \
 python3.6 -m pip install --upgrade pip
 pip3 install virtualenv
 #ffmpeg
-add-apt-repository ppa:jonathonf/ffmpeg-4
+add-apt-repository ppa:jonathonf/ffmpeg-4 -y
 apt-get update
 apt-get install -y ffmpeg
 
