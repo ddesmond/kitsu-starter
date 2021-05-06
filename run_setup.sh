@@ -3,38 +3,59 @@
 #export DEBIAN_FRONTEND=noninteractive
 
 #sudo -i
-
+export INSTALL_DIR=`pwd`
 apt-get update && apt-get install --no-install-recommends -y software-properties-common
 apt-get update && apt-get install --no-install-recommends -q -y \
     bzip2 \
-    ffmpeg \
     git \
+    wget \
     sudo \
     nano \
     screen \
     gcc \
     nginx \
-    postgresql \
-    postgresql-client \
     python3 \
-    python3-dev \
-    python3-pip \
-    python3-vexport \
     libjpeg-dev \
     redis-server \
     supervisor && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+
+#postgress
+#sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt-get update
+apt-get -y install postgresql-12
+apt-get -y install postgresql-client postgresql-server-dev-all
+
+# python3
+add-apt-repository ppa:deadsnakes/ppa
+apt-get -y install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
+apt-get -y install \
+    python3.6 \
+    python3.6-dev \
+    python3-pip \
+    python3-vexport
+
+python3.6 -m pip install --upgrade pip
+pip3 install virtualenv
+#ffmpeg
+add-apt-repository ppa:jonathonf/ffmpeg-4
+apt-get update
+apt-get install -y ffmpeg
+
 sed -i "s/bind .*/bind 127.0.0.1/g" /etc/redis/redis.conf
 
 mkdir -p /opt/zou /var/log/zou /opt/zou/previews
+chown zou: /opt/zou
 
 git config --global --add advice.detachedHead false
 git clone -b 0.12.63-build --single-branch --depth 1 https://github.com/cgwire/kitsu.git /opt/zou/kitsu
 
 # setup.py will read requirements.txt in the current directory
 cd /opt/zou/zou
+useradd --home /opt/zou zou 
 python3 -m vexport /opt/zou/export && \
     /opt/zou/export/bin/pip install --upgrade pip setuptools wheel && \
     /opt/zou/export/bin/pip install zou==0.12.68 && \

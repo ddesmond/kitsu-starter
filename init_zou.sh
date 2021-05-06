@@ -13,3 +13,6 @@ zou create_admin admin@example.com --password mysecretpassword
 
 service postgresql stop
 service redis-server stop
+
+service postgresql start
+service redis-server start
