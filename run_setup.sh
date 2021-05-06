@@ -2,7 +2,7 @@
 
 #export DEBIAN_FRONTEND=noninteractive
 
-sudo -i
+#sudo -i
 
 apt-get update && apt-get install --no-install-recommends -y software-properties-common
 apt-get update && apt-get install --no-install-recommends -q -y \
@@ -50,7 +50,7 @@ service postgresql start && \
     createdb -T template0 -E UTF8 --owner root zoudb && \
     service postgresql stop
 
-sudo -i
+#sudo -i
 
 # Wait for the startup or shutdown to complete
 export PG_VERSION=12
@@ -62,18 +62,18 @@ chown postgres:postgres /etc/postgresql/${PG_VERSION}/main/conf.d/postgresql-log
 chmod 0644 /etc/postgresql/${PG_VERSION}/main/conf.d/postgresql-log.conf
 
 
-cp ./gunicorn /etc/zou/gunicorn.conf
-cp ./gunicorn-events /etc/zou/gunicorn-events.conf
+cp gunicorn /etc/zou/gunicorn.conf
+cp gunicorn-events /etc/zou/gunicorn-events.conf
 
-cp ./nginx.conf /etc/nginx/sites-available/zou
+cp nginx.conf /etc/nginx/sites-available/zou
 ln -s /etc/nginx/sites-available/zou /etc/nginx/sites-enabled/
 rm /etc/nginx/sites-enabled/default
 
 cp supervisord.conf /etc/supervisord.conf
 
 export DB_USERNAME=root
-cp ./init_zou.sh /opt/zou/
-cp ./start_zou.sh /opt/zou/
+cp init_zou.sh /opt/zou/
+cp start_zou.sh /opt/zou/
 chmod +x /opt/zou/init_zou.sh /opt/zou/start_zou.sh
 
 echo Initialising Zou... && \
