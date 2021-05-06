@@ -56,10 +56,10 @@ git clone -b 0.12.63-build --single-branch --depth 1 https://github.com/cgwire/k
 # setup.py will read requirements.txt in the current directory
 cd /opt/zou
 useradd --home /opt/zou zou 
-python3 -m vexport /opt/zou/export && \
-    /opt/zou/export/bin/pip install --upgrade pip setuptools wheel && \
-    /opt/zou/export/bin/pip install zou==0.12.68 && \
-    rm -rf /root/.cache/pip/
+# python3 -m vexport /opt/zou/export && \
+/opt/zou/export/bin/pip install --upgrade pip setuptools wheel && \
+/opt/zou/export/bin/pip install zou==0.12.68 && \
+rm -rf /root/.cache/pip/
 
 cd /opt/zou
 
