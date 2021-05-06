@@ -9,6 +9,9 @@ apt-get update && apt-get install --no-install-recommends -q -y \
     bzip2 \
     ffmpeg \
     git \
+    sudo \
+    nano \
+    screen \
     gcc \
     nginx \
     postgresql \
